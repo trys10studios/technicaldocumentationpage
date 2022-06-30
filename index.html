@@ -16,8 +16,11 @@
         <a href="#anatomy_of_a_video_game" class="nav-link">Anatomy of a Video Game</a>
         <a href="#2D_Collision_Detection" class="nav-link">2D Collision Detection</a>
         <a href="#circle_collision" class="nav-link">Circle Collision</a>
+        Detection</a>
+        <a href="#reference" class="nav-link">Reference</a>
     </nav>
-    <section class="main-section" id="Introduction_to_HTML5_Canvas_Game_Dev">
+
+    <section class="main-section" id="intro">
         <header>Intro</header>
         <p>The modern web has quickly become a viable platform not only for creating stunning, high quality games, but
             also
@@ -33,9 +36,9 @@
         just-in-time compiler technology and new APIs, you can build games that run in the browser (or on HTML5-powered
         devices) without making compromises.</p>
     </section>
+
     <section class="main-section" id="background_knowledge">
-        <header> Background Knowledge:
-        </header>
+        <header> Background Knowledge</header>
         <li>A general understanding of the Internet and the World Wide Web (WWW).</li>
         <li>Good working knowledge of HyperText Markup Language (HTML).</li>
         <li>Some programming experience and some game dev experience and understanding.</li>
@@ -134,14 +137,16 @@
             executed at
             a
             suitable time before the next repaint. Here is an example of a simple main loop:</p>
-        <p><code>window.main = function () {
+        <p>
+        <pre><code>window.main = function () {
         window.requestAnimationFrame( main );
 
         // Whatever your main loop needs to do
       };
 
       main(); // Start the cycle
-      </code></p>
+      </code></pre>
+        </p>
         <p>Note: In each of the main() methods discussed here, we schedule a new requestAnimationFrame before performing
             our
             loop contents. That is not by accident and it is considered best practice. Calling the next
@@ -352,7 +357,8 @@
             If your game can hit the maximum refresh rate of any hardware you support then your job is fairly easy. You
             can
             update, render, and then do nothing until VSync.</p>
-        <p><code>/*
+        <p>
+            <code>/*
         * Starting with the semicolon is in case whatever line of code above this example
         * relied on automatic semicolon insertion (ASI). The browser could accidentally
         * think this whole example continues from the previous line. The leading semicolon
@@ -371,7 +377,8 @@
 
           main(); // Start the cycle
         })();
-        </code></p>
+    </code>
+        </p>
         <p>If the maximum refresh rate cannot be reached, quality settings could be adjusted to stay under your time
             budget.
             The most famous example of this concept is the game from id Software, RAGE. This game removed control from
@@ -543,7 +550,7 @@
             performant across multiple entities. This article provides a review of the most common techniques used to
             provide
             collision detection in 2D games.</p>
-        <p>
+        <p class="code">
             <code>Crafty.init(200, 200);
 
         var dim1 = {x: 5, y: 5}
@@ -611,7 +618,7 @@
             added
             together.</p>
         <p>
-            <code>Crafty.init(200, 200);
+        <pre><code>Crafty.init(200, 200);
 
             var dim1 = {x: 5, y: 5}
             var dim2 = {x: 20, y: 20}
@@ -661,7 +668,13 @@
                     this.color = "blue";
                 }
             });
-            </code>
+        </pre></code>
+        </p>
+    </section>
+    <section class="main-section" id="reference">
+        <header>Reference</header>
+        <p>
+            All the documentation in this page is taken from MDN
         </p>
     </section>
     </body>

@@ -1,12 +1,15 @@
 html,
 * {
     margin: 0;
+    font-family: sans-serif;
 }
 
 header {
     display: block;
     width: 100%;
     margin: 0 auto;
+    font-size: xx-large;
+    padding: 10px 0;
 }
 
 body {
@@ -19,9 +22,18 @@ body {
     left: 20px;
 }
 
-.nav-link {
-    float: left;
+p,
+li {
+    padding: 10px 0;
 }
+
+
+pre {
+    background-color: lightgray;
+    padding: 20px;
+}
+
+.nav-link {}
 
 @media screen and (max-width: 798px) {
     html {
