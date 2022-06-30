@@ -145,7 +145,7 @@
       };
 
       main(); // Start the cycle
-      </code></pre>
+      </pre>
         </p>
         <p>Note: In each of the main() methods discussed here, we schedule a new requestAnimationFrame before performing
             our
@@ -188,7 +188,8 @@
             closed or refreshed. For the first issue, if you want the main loop to just run and you do not need easy
             (direct)
             access to it, you could create it as an Immediately-Invoked Function Expression (IIFE).</p>
-        <p><code>/*
+        <p>
+        <pre>/*
             * Starting with the semicolon is in case whatever line of code above this example
             * relied on automatic semicolon insertion (ASI). The browser could accidentally
             * think this whole example continues from the previous line. The leading semicolon
@@ -204,7 +205,8 @@
 
               main(); // Start the cycle
             })();
-            </code></p>
+        </pre>
+        </p>
         <p>When the browser comes across this IIFE, it will define your main loop and immediately queue it for the next
             frame. It will not be attached to any object and main (or main() for methods) will be a valid unused name in
             the
@@ -219,7 +221,8 @@
             requestAnimationFrame() when it was last called. Let us assume that your game's functions and variables are
             built on a namespace that you called MyGame. Expanding our last example, the main loop would now look like:
         </p>
-        <p><code>/*
+        <p>
+        <pre>/*
             * Starting with the semicolon is in case whatever line of code above this example
             * relied on automatic semicolon insertion (ASI). The browser could accidentally
             * think this whole example continues from the previous line. The leading semicolon
@@ -237,13 +240,16 @@
 
               main(); // Start the cycle
             })();
-            </code></p>
+        </pre>
+        </p>
         <p>We now have a variable declared in our MyGame namespace, which we call stopMain, that contains the ID
             returned
             from our main loop's most recent call to requestAnimationFrame(). At any point, we can stop the main loop by
             telling the browser to cancel the request that corresponds to our token.</p>
-        <p><code>window.cancelAnimationFrame( MyGame.stopMain );
-            </code></p>
+        <p>
+        <pre>window.cancelAnimationFrame( MyGame.stopMain );
+        </pre>
+        </p>
         <p>The key to programming a main loop, in JavaScript, is to attach it to whatever event should be driving your
             action and pay attention to how the different systems involved interplay. You may have multiple components
             driven by multiple different types of events. This feels like unnecessary complexity but it might just be
@@ -550,8 +556,8 @@
             performant across multiple entities. This article provides a review of the most common techniques used to
             provide
             collision detection in 2D games.</p>
-        <p class="code">
-            <code>Crafty.init(200, 200);
+        <p>
+        <pre>Crafty.init(200, 200);
 
         var dim1 = {x: 5, y: 5}
         var dim2 = {x: 20, y: 20}
@@ -601,7 +607,7 @@
                 this.color = "blue";
             }
         });
-        </code>
+    </pre>
         </p>
 
         <p>Axis-Aligned Bounding Box
@@ -618,7 +624,7 @@
             added
             together.</p>
         <p>
-        <pre><code>Crafty.init(200, 200);
+        <pre>Crafty.init(200, 200);
 
             var dim1 = {x: 5, y: 5}
             var dim2 = {x: 20, y: 20}
@@ -668,7 +674,7 @@
                     this.color = "blue";
                 }
             });
-        </pre></code>
+        </pre>
         </p>
     </section>
     <section class="main-section" id="reference">

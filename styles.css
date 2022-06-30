@@ -19,7 +19,14 @@ body {
 
 #navbar {
     position: relative;
-    left: 20px;
+    float: left;
+    width: 50%;
+    height: 500px;
+}
+
+.nav-link {
+    position: relative;
+    float: left;
 }
 
 p,
@@ -27,13 +34,10 @@ li {
     padding: 10px 0;
 }
 
-
 pre {
     background-color: lightgray;
     padding: 20px;
 }
-
-.nav-link {}
 
 @media screen and (max-width: 798px) {
     html {
