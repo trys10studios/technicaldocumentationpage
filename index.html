@@ -2,13 +2,245 @@
 <html>
 
 <head>
-    <title>Technical Documentation Page</title>
+    <title>Technical Documentation HTML5 Canvas Game Dev Page</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 
-<body>
-    <div></div>
-</body>
+<main id="main-doc">
+    <section class="main-section" id="intro"></section>
+    <header>Introduction to HTML5 Canvas Game Dev</header>
+    <p>The modern web has quickly become a viable platform not only for creating stunning, high quality games, but also
+        for
+        distributing those games.</p>
+
+    <p>The range of games that can be created is on par with desktop and native OS counterparts. With modern Web
+        technologies and a recent browser, it's entirely possible to make stunning, top-notch games for the Web.
+    <p>We're
+        not talking about simple card games or multi-player social games that have in the olden days been done using
+        Flash®.</p>
+    We're talking about 3D action shooters, RPGs, and more. Thanks to massive performance improvements in JavaScript
+    just-in-time compiler technology and new APIs, you can build games that run in the browser (or on HTML5-powered
+    devices) without making compromises.</p>
+    </section>
+    <section class="main-section" id="basic-background"></section>
+    <header> This guide assumes you have the following basic background:
+    </header>
+    <p>
+        <li>A general understanding of the Internet and the World Wide Web (WWW).</li>
+        <li>Good working knowledge of HyperText Markup Language (HTML).</li>
+        <li>Some programming experience and some game dev experience and understanding. If you are new to programming,
+            try
+            one
+            of the tutorials linked
+            on the main page about
+            JavaScript.</li>
+    </p>
+    </section>
+    <section class="main-section" id="anatomy_of_a_video_game"></section>
+    <header>Anatomy of a Video Game</header>
+    <p>
+        This article looks at the anatomy and workflow of the average video game from a technical point of view, in
+        terms of
+        how the main loop should run. It helps beginners to modern game development understand what is required when
+        building a game and how web standards like JavaScript lend themselves as tools. Experienced game programmers who
+        are
+        new to web development could also benefit, too.</p>
+
+    <p>Present, accept, interpret, calculate, repeat
+        The goal of every video game is to present the user(s) with a situation, accept their input, interpret those
+        signals
+        into actions, and calculate a new situation resulting from those acts. Games are constantly looping through
+        these
+        stages, over and over, until some end condition occurs (such as winning, losing, or exiting to go to bed). Not
+        surprisingly, this pattern corresponds to how a game engine is programmed.</p>
+
+    <p>The specifics depend on the game.</p>
+
+    <p>Some games drive this cycle by user input. Imagine that you are developing a "find the differences between these
+        two
+        similar pictures"-type game. These games present two images to the user; they accept their click (or touch);
+        they
+        interpret the input as a success, failure, pause, menu interaction, etc.; finally, they calculate an updated
+        scene
+        resulting from that input. The game loop is advanced by the user's input and sleeps until they provide it. This
+        is
+        more of a turn-based approach that doesn't demand a constant update every frame, only when the player reacts.
+    </p>
+
+    <p>Other games demand control over each of the smallest possible individual timeslices. The same principles as above
+        apply with a slight twist: each frame of animation progresses the cycle and any change in user input is caught
+        at
+        the first available turn. This once-per-frame model is implemented in something called a main loop. If your game
+        loops based on time then this will be its authority that your simulations will adhere to.</p>
+
+    <p>But it might not need per-frame control. Your game loop might be similar to the find the differences example and
+        base itself on input events. It might require both input and simulated time. It might even loop based on
+        something
+        else entirely.</p>
+
+    <p>Modern JavaScript — as described in the next sections — thankfully makes it easy to develop an efficient,
+        execute-once-per-frame main loop. Of course, your game will only be as optimized as you make it. If something
+        looks
+        like it should be attached to a more infrequent event then it is often a good idea to break it out of the main
+        loop
+        (but not always).</p>
+
+    <p>Building a main loop in JavaScript
+        JavaScript works best with events and callback functions. Modern browsers strive to call methods right as they
+        are
+        needed and idle (or do their other tasks) in the gaps. It is an excellent idea to attach your code to the
+        moments
+        that are appropriate for them. Think about whether your function really needs to be called on a strict interval
+        of
+        time, every frame, or only after something else happens. Being more specific with the browser about when your
+        function needs to be called allows the browser to optimize when it is called. Also, it will probably make your
+        job
+        easier.</p>
+
+    <p>Some code needs to be run frame-by-frame so why attach that function to anything other than the browser's redraw
+        schedule? On the Web, window.requestAnimationFrame() will be the foundation of most well-programmed per-frame
+        main
+        loops. A callback function must be passed in to it when it is called. That callback function will be executed at
+        a
+        suitable time before the next repaint. Here is an example of a simple main loop:</p>
+    <p><code>window.main = function () {
+        window.requestAnimationFrame( main );
+
+        // Whatever your main loop needs to do
+      };
+
+      main(); // Start the cycle
+      </code></p>
+    </section>
+    <section class="main-section" id="2D_Collision_Detection"></section>
+    <header>2D Collision Detection</header>
+    <p>Algorithms to detect collision in 2D games depend on the type of shapes that can collide (e.g. Rectangle to
+        Rectangle, Rectangle to Circle, Circle to Circle).</p>
+    <p>Generally you will have a simple generic shape that covers
+        the
+        entity known as a "hitbox" so even though collision may not be pixel perfect, it will look good enough and be
+        performant across multiple entities. This article provides a review of the most common techniques used to
+        provide
+        collision detection in 2D games.</p>
+    <p>
+        <code>Crafty.init(200, 200);
+
+        var dim1 = {x: 5, y: 5}
+        var dim2 = {x: 20, y: 20}
+
+        Crafty.c("Circle", {
+           circle: function(radius, color) {
+                this.radius = radius;
+                this.w = this.h = radius * 2;
+                this.color = color || "#000000";
+
+                this.bind("Move", Crafty.DrawManager.drawAll)
+                return this;
+           },
+
+           draw: function() {
+               var ctx = Crafty.canvas.context;
+               ctx.save();
+               ctx.fillStyle = this.color;
+               ctx.beginPath();
+               ctx.arc(
+                   this.x + this.radius,
+                   this.y + this.radius,
+                   this.radius,
+                   0,
+                   Math.PI * 2
+               );
+               ctx.closePath();
+               ctx.fill();
+               ctx.restore();
+            }
+        });
+
+        var circle1 = Crafty.e("2D, Canvas, Circle").attr(dim1).circle(15, "red");
+
+        var circle2 = Crafty.e("2D, Canvas, Circle, Fourway").fourway(2).attr(dim2).circle(20, "blue");
+
+        circle2.bind("EnterFrame", function () {
+            var dx = (circle1.x + circle1.radius) - (circle2.x + circle2.radius);
+            var dy = (circle1.y + circle1.radius) - (circle2.y + circle2.radius);
+            var distance = Math.sqrt(dx * dx + dy * dy);
+
+            if (distance < circle1.radius + circle2.radius) {
+                // collision detected!
+                this.color = "green";
+            } else {
+                // no collision
+                this.color = "blue";
+            }
+        });
+        </code>
+    </p>
+
+    Axis-Aligned Bounding Box
+    One of the simpler forms of collision detection is between two rectangles that are axis aligned — meaning no
+    rotation. The algorithm works by ensuring there is no gap between any of the 4 sides of the rectangles. Any gap
+    means a collision does not exist.
+    </section>
+    <section class="main-section"></section>
+    <header>Circle Collision</header>
+    <p>Another simple shape for collision detection is between two circles. This algorithm works by taking the center
+        points of the two circles and ensuring the distance between the center points are less than the two radii added
+        together.</p>
+    <p>
+        <code>Crafty.init(200, 200);
+
+            var dim1 = {x: 5, y: 5}
+            var dim2 = {x: 20, y: 20}
+
+            Crafty.c("Circle", {
+               circle: function(radius, color) {
+                    this.radius = radius;
+                    this.w = this.h = radius * 2;
+                    this.color = color || "#000000";
+
+                    this.bind("Move", Crafty.DrawManager.drawAll)
+                    return this;
+               },
+
+               draw: function() {
+                   var ctx = Crafty.canvas.context;
+                   ctx.save();
+                   ctx.fillStyle = this.color;
+                   ctx.beginPath();
+                   ctx.arc(
+                       this.x + this.radius,
+                       this.y + this.radius,
+                       this.radius,
+                       0,
+                       Math.PI * 2
+                   );
+                   ctx.closePath();
+                   ctx.fill();
+                   ctx.restore();
+                }
+            });
+
+            var circle1 = Crafty.e("2D, Canvas, Circle").attr(dim1).circle(15, "red");
+
+            var circle2 = Crafty.e("2D, Canvas, Circle, Fourway").fourway(2).attr(dim2).circle(20, "blue");
+
+            circle2.bind("EnterFrame", function () {
+                var dx = (circle1.x + circle1.radius) - (circle2.x + circle2.radius);
+                var dy = (circle1.y + circle1.radius) - (circle2.y + circle2.radius);
+                var distance = Math.sqrt(dx * dx + dy * dy);
+
+                if (distance < circle1.radius + circle2.radius) {
+                    // collision detected!
+                    this.color = "green";
+                } else {
+                    // no collision
+                    this.color = "blue";
+                }
+            });
+            </code>
+    </p>
+    </section>
+    </body>
 
 </html>
