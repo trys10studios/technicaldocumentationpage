@@ -15,8 +15,7 @@
         <a href="#background_knowledge" class="nav-link">Background Knowledge</a>
         <a href="#anatomy_of_a_video_game" class="nav-link">Anatomy of a Video Game</a>
         <a href="#2D_Collision_Detection" class="nav-link">2D Collision Detection</a>
-        <a href="#circle_collision" class="nav-link">Circle Collision</a>
-        Detection</a>
+        <a href="#circle_collision" class="nav-link">Circle Collision Detection</a>
         <a href="#reference" class="nav-link">Reference</a>
     </nav>
 
@@ -138,7 +137,7 @@
             a
             suitable time before the next repaint. Here is an example of a simple main loop:</p>
         <p>
-        <pre><code>window.main = function () {
+        <pre>prewindow.main = function () {
         window.requestAnimationFrame( main );
 
         // Whatever your main loop needs to do
@@ -310,14 +309,17 @@
             two
             points. To acquire one of these timestamps, you can call window.performance.now() and store the result as a
             variable.</p>
-        <p><code>var tNow = window.performance.now();
-        </code></p>
+        <p>
+        <pre>var tNow = window.performance.now();
+        </pre>
+        </p>
         <p>Back to the topic of the main loop. You will often want to know when your main function was invoked. Because
             this
             is common, window.requestAnimationFrame() always provides a DOMHighResTimeStamp to callbacks as an argument
             when
             they are executed. This leads to another enhancement to our previous main loops.</p>
-        <p><code>/*
+        <p>
+        <pre>/*
             * Starting with the semicolon is in case whatever line of code above this example
             * relied on automatic semicolon insertion (ASI). The browser could accidentally
             * think this whole example continues from the previous line. The leading semicolon
@@ -336,7 +338,8 @@
 
               main(); // Start the cycle
             })();
-            </code></p>
+            </pre>
+        </p>
         <p>Several other optimizations are possible and it really depends on what your game attempts to accomplish. Your
             game
             genre will obviously make a difference but it could even be more subtle than that. You could draw every
@@ -364,26 +367,26 @@
             can
             update, render, and then do nothing until VSync.</p>
         <p>
-            <code>/*
-        * Starting with the semicolon is in case whatever line of code above this example
-        * relied on automatic semicolon insertion (ASI). The browser could accidentally
-        * think this whole example continues from the previous line. The leading semicolon
-        * marks the beginning of our new line if the previous one was not empty or terminated.
-        *
-        * Let us also assume that MyGame is previously defined.
-        */
+            pre/*
+            * Starting with the semicolon is in case whatever line of code above this example
+            * relied on automatic semicolon insertion (ASI). The browser could accidentally
+            * think this whole example continues from the previous line. The leading semicolon
+            * marks the beginning of our new line if the previous one was not empty or terminated.
+            *
+            * Let us also assume that MyGame is previously defined.
+            */
 
-        ;(function () {
-          function main( tFrame ) {
+            ;(function () {
+            function main( tFrame ) {
             MyGame.stopMain = window.requestAnimationFrame( main );
 
             update( tFrame ); // Call your update method. In our case, we give it rAF's timestamp.
             render();
-          }
+            }
 
-          main(); // Start the cycle
-        })();
-    </code>
+            main(); // Start the cycle
+            })();
+            </code>
         </p>
         <p>If the maximum refresh rate cannot be reached, quality settings could be adjusted to stay under your time
             budget.
@@ -443,7 +446,7 @@
             honest, writability).</p>
 
         <p>Warning: This example, specifically, is in need of technical review.</p>
-        <p><code>/*
+        <p>pre/*
             * Starting with the semicolon is in case whatever line of code above this example
             * relied on automatic semicolon insertion (ASI). The browser could accidentally
             * think this whole example continues from the previous line. The leading semicolon
@@ -459,53 +462,44 @@
             * numTicks is how many updates should have happened between these two rendered frames.
             *
             * render() is passed tFrame because it is assumed that the render method will calculate
-            *          how long it has been since the most recently passed update tick for
-            *          extrapolation (purely cosmetic for fast devices). It draws the scene.
+            * how long it has been since the most recently passed update tick for
+            * extrapolation (purely cosmetic for fast devices). It draws the scene.
             *
             * update() calculates the game state as of a given point in time. It should always
-            *          increment by tickLength. It is the authority for game state. It is passed
-            *          the DOMHighResTimeStamp for the time it represents (which, again, is always
-            *          last update + MyGame.tickLength unless a pause feature is added, etc.)
+            * increment by tickLength. It is the authority for game state. It is passed
+            * the DOMHighResTimeStamp for the time it represents (which, again, is always
+            * last update + MyGame.tickLength unless a pause feature is added, etc.)
             *
             * setInitialState() Performs whatever tasks are leftover before the main loop must run.
-            *                   It is just a generic example function that you might have added.
+            * It is just a generic example function that you might have added.
             */
 
             ;(function () {
-              function main( tFrame ) {
-                MyGame.stopMain = window.requestAnimationFrame( main );
-                var nextTick = MyGame.lastTick + MyGame.tickLength;
-                var numTicks = 0;
+            function main( tFrame ) {
+            MyGame.stopMain = window.requestAnimationFrame( main );
+            var nextTick = MyGame.lastTick + MyGame.tickLength;
+            var numTicks = 0;
 
-                // If tFrame < nextTick then 0 ticks need to be updated (0 is default for numTicks).
-                // If tFrame = nextTick then 1 tick needs to be updated (and so forth).
-                // Note: As we mention in summary, you should keep track of how large numTicks is.
-                // If it is large, then either your game was asleep, or the machine cannot keep up.
-                if (tFrame > nextTick) {
-                  var timeSinceTick = tFrame - MyGame.lastTick;
-                  numTicks = Math.floor( timeSinceTick / MyGame.tickLength );
+            // If tFrame < nextTick then 0 ticks need to be updated (0 is default for numTicks). // If tFrame=nextTick
+                then 1 tick needs to be updated (and so forth). // Note: As we mention in summary, you should keep track
+                of how large numTicks is. // If it is large, then either your game was asleep, or the machine cannot
+                keep up. if (tFrame> nextTick) {
+                var timeSinceTick = tFrame - MyGame.lastTick;
+                numTicks = Math.floor( timeSinceTick / MyGame.tickLength );
                 }
 
                 queueUpdates( numTicks );
                 render( tFrame );
                 MyGame.lastRender = tFrame;
-              }
-
-              function queueUpdates( numTicks ) {
-                for(var i=0; i < numTicks; i++) {
-                  MyGame.lastTick = MyGame.lastTick + MyGame.tickLength; // Now lastTick is this tick.
-                  update( MyGame.lastTick );
                 }
-              }
 
-              MyGame.lastTick = performance.now();
-              MyGame.lastRender = MyGame.lastTick; // Pretend the first draw was on first update.
-              MyGame.tickLength = 50; // This sets your simulation to run at 20Hz (50ms)
-
-              setInitialState();
-              main(performance.now()); // Start the cycle
-            })();
-            </code></p>
+                function queueUpdates( numTicks ) {
+                for(var i=0; i < numTicks; i++) { MyGame.lastTick=MyGame.lastTick + MyGame.tickLength; // Now lastTick
+                    is this tick. update( MyGame.lastTick ); } } MyGame.lastTick=performance.now();
+                    MyGame.lastRender=MyGame.lastTick; // Pretend the first draw was on first update.
+                    MyGame.tickLength=50; // This sets your simulation to run at 20Hz (50ms) setInitialState();
+                    main(performance.now()); // Start the cycle })(); </code>
+        </p>
         <p>Another alternative is to do certain things less often. If a portion of your update loop is difficult to
             compute
             but insensitive to time, you might consider scaling back its frequency and, ideally, spreading it out into
@@ -683,6 +677,7 @@
             All the documentation in this page is taken from MDN
         </p>
     </section>
-    </body>
+
+</html>
 
 </html>
