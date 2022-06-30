@@ -16,12 +16,14 @@ body {
     margin: 10px auto;
 }
 
-section {
-    width: 20%;
+#bodyText {
+    width: 50%;
+    margin: 0 0 0 50%;
 }
 
 #navbar {
     display: inline-block;
+    position: fixed;
     width: 30%;
     height: 600px;
     border-right-style: solid;
@@ -37,9 +39,11 @@ section {
 }
 
 p,
-li {
-    padding: 10px 0;
+li,
+section,
+pre {
     margin: 0;
+    padding: 10px
 }
 
 pre {
@@ -56,12 +60,18 @@ pre {
         width: 100%;
     }
 
+    #bodyText {
+        width: 100%;
+        margin: 0;
+    }
+
     #navbar {
         position: relative;
         width: 100%;
         padding: 5px;
         margin: 5px;
         border: none;
+        height: auto;
     }
 
     .nav-link {
