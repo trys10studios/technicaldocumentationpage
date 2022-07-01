@@ -43,10 +43,11 @@ li,
 section,
 pre {
     margin: 0;
-    padding: 10px
+    padding: 10px;
 }
 
 pre {
+    white-space: pre-wrap;
     background-color: lightgray;
     padding: 20px;
 }
