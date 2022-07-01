@@ -8,7 +8,7 @@ header {
     display: inline-block;
     width: 100%;
     font-size: xx-large;
-    padding: 10px 0;
+    padding: 10px;
 }
 
 body {
@@ -33,7 +33,7 @@ body {
     display: inline-block;
     width: 100%;
     padding: 10px;
-    margin: 0;
+    margin: 0 auto;
 }
 
 #main-doc {
@@ -45,14 +45,13 @@ p,
 li,
 section,
 pre {
-    margin: 0;
+    margin: 0 auto;
     padding: 10px;
 }
 
 pre {
     white-space: pre-wrap;
     background-color: lightgray;
-    padding: 20px;
 }
 
 @media screen and (max-width: 798px) {
@@ -64,9 +63,9 @@ pre {
         width: 100%;
     }
 
-    #bodyText {
+    #main-doc {
         width: 100%;
-        margin: 0;
+        margin: 0 auto;
     }
 
     #navbar {
