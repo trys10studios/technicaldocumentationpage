@@ -11,15 +11,16 @@
 <main id="main-doc">
     <nav id="navbar">
         <header>HTML5 Canvas Game Dev</header>
-        <a href="#intro" class="nav-link">Intro</a>
-        <a href="#background_knowledge" class="nav-link">Background Knowledge</a>
-        <a href="#anatomy_of_a_video_game" class="nav-link">Anatomy of a Video Game</a>
-        <a href="#2D_Collision_Detection" class="nav-link">2D Collision Detection</a>
-        <a href="#circle_collision" class="nav-link">Circle Collision Detection</a>
-        <a href="#reference" class="nav-link">Reference</a>
+        <a href="#Intro" class="nav-link" text="Intro">Intro</a>
+        <a href="#Background_Knowledge" class="nav-link" text="Background_Knowledge">Background Knowledge</a>
+        <a href="#anatomy_of_a_video_game" class="nav-link" text="Anatomy_of_a_Video_Game">Anatomy of a Video Game</a>
+        <a href="#2D_Collision_Detection" class="nav-link" text="2D_Collision_Detection">2D Collision Detection</a>
+        <a href="#Circle_Collision_Detection" class="nav-link" text="Circle_Collision_Detection">Circle Collision
+            Detection</a>
+        <a href="#Reference" class="nav-link" text="Reference">Reference</a>
     </nav>
 
-    <section class="main-section" id="intro">
+    <section class="main-section" id="Intro">
         <header>Intro</header>
         <p>The modern web has quickly become a viable platform not only for creating stunning, high quality games,
             but
@@ -40,7 +41,7 @@
             devices) without making compromises.</p>
     </section>
 
-    <section class="main-section" id="background_knowledge">
+    <section class="main-section" id="Background_Knowledge">
         <header>Background Knowledge</header>
         <li>A general understanding of the Internet and the World Wide Web (WWW).</li>
         <li>Good working knowledge of HyperText Markup Language (HTML).</li>
@@ -55,7 +56,7 @@
             prepared. A solid foundation in programming is helpful, and I belive in learning by doing.</li>
     </section>
 
-    <section class="main-section" id="anatomy_of_a_video_game">
+    <section class="main-section" id="Anatomy_of_a_Video_Game">
         <header>Anatomy of a Video Game</header>
         <p>
             This article looks at the anatomy and workflow of the average video game from a technical point of view,
@@ -158,14 +159,14 @@
             a
             suitable time before the next repaint. Here is an example of a simple main loop:</p>
         <p>
-        <pre>prewindow.main = function () {
+            <code><pre>prewindow.main = function () {
         window.requestAnimationFrame( main );
 
         // Whatever your main loop needs to do
       };
 
       main(); // Start the cycle
-      </pre>
+      </pre></code>
         </p>
         <p>Note: In each of the main() methods discussed here, we schedule a new requestAnimationFrame before
             performing
@@ -217,7 +218,7 @@
             (direct)
             access to it, you could create it as an Immediately-Invoked Function Expression (IIFE).</p>
         <p>
-        <pre>/*
+        <pre></code>/*
             * Starting with the semicolon is in case whatever line of code above this example
             * relied on automatic semicolon insertion (ASI). The browser could accidentally
             * think this whole example continues from the previous line. The leading semicolon
@@ -225,15 +226,15 @@
             */
 
             ;(function () {
-              function main() {
-                window.requestAnimationFrame( main );
+            function main() {
+            window.requestAnimationFrame( main );
 
-                // Your main loop contents
-              }
+            // Your main loop contents
+            }
 
-              main(); // Start the cycle
+            main(); // Start the cycle
             })();
-        </pre>
+            </pre></code>
         </p>
         <p>When the browser comes across this IIFE, it will define your main loop and immediately queue it for the
             next
@@ -254,8 +255,8 @@
             like:
         </p>
         <p>
-        <pre>/*
-            * Starting with the semicolon is in case whatever line of code above this example
+        <pre><code>/*
+            Starting with the semicolon is in case whatever line of code above this example
             * relied on automatic semicolon insertion (ASI). The browser could accidentally
             * think this whole example continues from the previous line. The leading semicolon
             * marks the beginning of our new line if the previous one was not empty or terminated.
@@ -272,7 +273,7 @@
 
               main(); // Start the cycle
             })();
-        </pre>
+        </pre></code>
         </p>
         <p>We now have a variable declared in our MyGame namespace, which we call stopMain, that contains the ID
             returned
@@ -280,8 +281,8 @@
             loop by
             telling the browser to cancel the request that corresponds to our token.</p>
         <p>
-        <pre>window.cancelAnimationFrame( MyGame.stopMain );
-        </pre>
+            <code><pre>window.cancelAnimationFrame( MyGame.stopMain );
+        </pre></code>
         </p>
         <p>The key to programming a main loop, in JavaScript, is to attach it to whatever event should be driving
             your
@@ -363,7 +364,7 @@
             variable.</p>
         <p>
         <pre>var tNow = window.performance.now();
-        </pre>
+        </pre></code>
         </p>
         <p>Back to the topic of the main loop. You will often want to know when your main function was invoked.
             Because
@@ -373,6 +374,7 @@
             when
             they are executed. This leads to another enhancement to our previous main loops.</p>
         <p>
+            </code>
         <pre>/*
             * Starting with the semicolon is in case whatever line of code above this example
             * relied on automatic semicolon insertion (ASI). The browser could accidentally
@@ -392,7 +394,7 @@
 
               main(); // Start the cycle
             })();
-            </pre>
+            </pre></code>
         </p>
         <p>Several other optimizations are possible and it really depends on what your game attempts to accomplish.
             Your
@@ -639,7 +641,7 @@
             provide
             collision detection in 2D games.</p>
         <p>
-        <pre>Crafty.init(200, 200);
+            <code><pre>Crafty.init(200, 200);
 
         var dim1 = {x: 5, y: 5}
         var dim2 = {x: 20, y: 20}
@@ -689,7 +691,7 @@
                 this.color = "blue";
             }
         });
-    </pre>
+    </pre></code>
         </p>
 
         <p>Axis-Aligned Bounding Box
@@ -700,8 +702,8 @@
             gap
             means a collision does not exist.</p>
     </section>
-    <section class="main-section" id="circle_collision">
-        <header>Circle Collision</header>
+    <section class="main-section" id="Circle_Collision_Detection">
+        <header>Circle Collision Detection</header>
         <p>Another simple shape for collision detection is between two circles. This algorithm works by taking the
             center
             points of the two circles and ensuring the distance between the center points are less than the two
@@ -709,7 +711,7 @@
             added
             together.</p>
         <p>
-        <pre>Crafty.init(200, 200);
+            <code><pre>Crafty.init(200, 200);
 
             var dim1 = {x: 5, y: 5}
             var dim2 = {x: 20, y: 20}
@@ -759,10 +761,10 @@
                     this.color = "blue";
                 }
             });
-        </pre>
+        </pre></code>
         </p>
     </section>
-    <section class="main-section" id="reference">
+    <section class="main-section" id="Reference">
         <header>Reference</header>
         <p>
             All the documentation in this page is taken from MDN
